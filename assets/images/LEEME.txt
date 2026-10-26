@@ -1,0 +1,3 @@
+Coloca aquí la imagen de la Sección 1 (Figura 1) con el nombre: figura-1.jpg
+(Formatos: JPG, PNG o WebP. Si usas otro nombre o extensión, actualiza el src en index.html)
+Tamaño recomendado: 1200x900 px (proporción 4:3)

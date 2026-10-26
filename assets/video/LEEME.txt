@@ -1,0 +1,2 @@
+Coloca aquí el video de la Sección 3 con el nombre: entrevista.mp4
+(Formato recomendado: MP4 H.264. Si usas otro nombre, actualiza el src en index.html)

@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El médico ante el algoritmo | IA en la Salud</title>
+  <meta name="description" content="Micrositio bioético sobre los dilemas de la inteligencia artificial aplicada a la salud. Juan Pablo Cortes — Ética y Axiología.">
+  <meta name="author" content="Juan Pablo Cortes">
+
+  <!-- Tipografías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+          },
+          colors: {
+            navy: {
+              50: '#eef2fa', 100: '#d9e1f2', 200: '#b6c5e6', 300: '#8aa2d3', 400: '#5e7cbb',
+              500: '#3f5fa3', 600: '#2f4f8f', 700: '#243d72', 800: '#1b2d55', 900: '#121f3d', 950: '#0a1226',
+            },
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body class="bg-white font-sans text-slate-700 antialiased">
+
+  <!-- Barra de progreso de lectura -->
+  <div class="fixed inset-x-0 top-0 z-[60] h-1 bg-transparent">
+    <div id="progress-bar" class="h-full w-0 bg-gradient-to-r from-navy-400 to-slate-300"></div>
+  </div>
+
+  <!-- ===================== NAVEGACIÓN ===================== -->
+  <header id="site-header" class="fixed inset-x-0 top-0 z-50 bg-navy-950/90 backdrop-blur transition-shadow">
+    <nav class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8" aria-label="Navegación principal">
+      <a href="#inicio" class="flex items-center gap-2 font-display text-lg font-bold text-white">
+        <span class="grid h-8 w-8 place-items-center rounded-lg bg-white text-sm font-extrabold text-navy-900">IA</span>
+        <span>Bioética<span class="text-navy-300">·</span>Salud</span>
+      </a>
+
+      <ul class="hidden items-center gap-1 text-sm font-medium text-slate-300 lg:flex">
+        <li><a href="#dilema" class="nav-link rounded-full px-3 py-2 transition hover:text-white">1. Dilema</a></li>
+        <li><a href="#analisis" class="nav-link rounded-full px-3 py-2 transition hover:text-white">2. Análisis</a></li>
+        <li><a href="#experiencia" class="nav-link rounded-full px-3 py-2 transition hover:text-white">3. Experiencia</a></li>
+        <li><a href="#deliberacion" class="nav-link rounded-full px-3 py-2 transition hover:text-white">4. Deliberación</a></li>
+        <li><a href="#conclusiones" class="nav-link rounded-full px-3 py-2 transition hover:text-white">5. Conclusiones</a></li>
+        <li><a href="#referencias" class="nav-link rounded-full px-3 py-2 transition hover:text-white">6. Referencias</a></li>
+      </ul>
+
+      <button id="menu-toggle" class="rounded-lg p-2 text-white hover:bg-white/10 lg:hidden" aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menú">
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </nav>
+
+    <div id="mobile-menu" class="hidden border-t border-white/10 bg-navy-950 lg:hidden">
+      <ul class="space-y-1 px-4 py-4 text-sm font-medium text-slate-300">
+        <li><a href="#dilema" class="nav-link block rounded-lg px-3 py-2">1. Presentación del dilema</a></li>
+        <li><a href="#analisis" class="nav-link block rounded-lg px-3 py-2">2. Análisis interdisciplinario</a></li>
+        <li><a href="#experiencia" class="nav-link block rounded-lg px-3 py-2">3. La voz de la experiencia</a></li>
+        <li><a href="#deliberacion" class="nav-link block rounded-lg px-3 py-2">4. Deliberación ética</a></li>
+        <li><a href="#conclusiones" class="nav-link block rounded-lg px-3 py-2">5. Conclusiones</a></li>
+        <li><a href="#referencias" class="nav-link block rounded-lg px-3 py-2">6. Referencias</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===================== PORTADA ===================== -->
+    <section id="inicio" class="relative overflow-hidden bg-navy-950 pt-16 text-white">
+      <div class="grid-pattern absolute inset-0"></div>
+      <div class="absolute -right-40 -top-40 h-[32rem] w-[32rem] rounded-full bg-navy-600/30 blur-3xl"></div>
+      <div class="absolute -bottom-40 -left-20 h-96 w-96 rounded-full bg-slate-500/20 blur-3xl"></div>
+
+      <div class="relative mx-auto grid max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 md:py-28 lg:grid-cols-2 lg:px-8">
+        <div class="reveal">
+          <p class="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-navy-200">
+            <span class="h-1.5 w-1.5 rounded-full bg-navy-300"></span> Micrositio bioético
+          </p>
+          <h1 class="font-display text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
+            El médico contra el <span class="bg-gradient-to-r from-navy-200 to-slate-300 bg-clip-text text-transparent">algoritmo</span>
+          </h1>
+          <p class="mt-6 max-w-xl text-lg leading-relaxed text-slate-300">
+            Dilemas éticos de la inteligencia artificial aplicada a la salud.
+          </p>
+
+          <dl class="mt-10 grid max-w-md grid-cols-2 gap-6 border-t border-white/10 pt-8 text-sm">
+            <div>
+              <dt class="text-slate-400">Autor</dt>
+              <dd class="mt-1 font-display text-base font-semibold text-white">Juan Pablo Cortes</dd>
+            </div>
+            <div>
+              <dt class="text-slate-400">Asignatura</dt>
+              <dd class="mt-1 font-display text-base font-semibold text-white">Ética y Axiología</dd>
+            </div>
+          </dl>
+
+          <div class="mt-10 flex flex-wrap gap-3">
+            <a href="#dilema" class="rounded-full bg-white px-6 py-3 text-sm font-semibold text-navy-950 transition hover:bg-navy-100">Explorar el dilema</a>
+            <a href="#deliberacion" class="rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">Escuchar el podcast</a>
+          </div>
+        </div>
+
+        <!-- Ilustración: médico ↔ algoritmo -->
+        <div class="reveal relative mx-auto w-full max-w-md lg:max-w-none">
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-6 shadow-2xl backdrop-blur sm:p-8">
+            <svg viewBox="0 0 400 300" class="w-full" role="img" aria-label="Ilustración: un trazo de electrocardiograma que se convierte en una red neuronal">
+              <defs>
+                <linearGradient id="g1" x1="0" x2="1">
+                  <stop offset="0" stop-color="#b6c5e6"/>
+                  <stop offset="1" stop-color="#cbd5e1"/>
+                </linearGradient>
+              </defs>
+              <!-- ECG -->
+              <path d="M0 150 H70 L85 120 L100 190 L118 70 L135 210 L150 150 H200" fill="none" stroke="url(#g1)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- Red neuronal -->
+              <g stroke="#5e7cbb" stroke-width="1.2" opacity="0.7">
+                <line x1="200" y1="150" x2="270" y2="80"/><line x1="200" y1="150" x2="270" y2="150"/><line x1="200" y1="150" x2="270" y2="220"/>
+                <line x1="270" y1="80" x2="340" y2="110"/><line x1="270" y1="80" x2="340" y2="190"/>
+                <line x1="270" y1="150" x2="340" y2="110"/><line x1="270" y1="150" x2="340" y2="190"/>
+                <line x1="270" y1="220" x2="340" y2="110"/><line x1="270" y1="220" x2="340" y2="190"/>
+                <line x1="340" y1="110" x2="385" y2="150"/><line x1="340" y1="190" x2="385" y2="150"/>
+              </g>
+              <g fill="#0a1226" stroke="#b6c5e6" stroke-width="2">
+                <circle cx="200" cy="150" r="8"/>
+                <circle cx="270" cy="80" r="7"/><circle cx="270" cy="150" r="7"/><circle cx="270" cy="220" r="7"/>
+                <circle cx="340" cy="110" r="7"/><circle cx="340" cy="190" r="7"/>
+                <circle cx="385" cy="150" r="9" fill="#b6c5e6"/>
+              </g>
+              <!-- Caja negra -->
+              <rect x="250" y="55" width="110" height="190" rx="14" fill="none" stroke="#94a3b8" stroke-dasharray="5 6" opacity="0.6"/>
+              <text x="305" y="270" text-anchor="middle" fill="#94a3b8" font-size="12" font-family="Inter">¿caja negra?</text>
+              <text x="100" y="250" text-anchor="middle" fill="#94a3b8" font-size="12" font-family="Inter">juicio clínico</text>
+            </svg>
+          </div>
+          <div class="absolute -bottom-6 -left-4 rounded-2xl bg-white p-4 text-navy-950 shadow-xl sm:-left-8">
+            <p class="font-display text-2xl font-extrabold">¿Quién decide?</p>
+            <p class="text-xs text-slate-500">El médico, el algoritmo… o ambos</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Índice de secciones -->
+      <div class="relative border-t border-white/10 bg-navy-950/60">
+        <div class="mx-auto grid max-w-7xl grid-cols-2 gap-px px-4 sm:grid-cols-3 sm:px-6 lg:grid-cols-6 lg:px-8">
+          <a href="#dilema" class="group px-2 py-5 text-sm text-slate-400 transition hover:text-white"><span class="block font-display text-xs text-navy-300">01</span>Presentación</a>
+          <a href="#analisis" class="group px-2 py-5 text-sm text-slate-400 transition hover:text-white"><span class="block font-display text-xs text-navy-300">02</span>Análisis</a>
+          <a href="#experiencia" class="group px-2 py-5 text-sm text-slate-400 transition hover:text-white"><span class="block font-display text-xs text-navy-300">03</span>Experiencia</a>
+          <a href="#deliberacion" class="group px-2 py-5 text-sm text-slate-400 transition hover:text-white"><span class="block font-display text-xs text-navy-300">04</span>Deliberación</a>
+          <a href="#conclusiones" class="group px-2 py-5 text-sm text-slate-400 transition hover:text-white"><span class="block font-display text-xs text-navy-300">05</span>Conclusiones</a>
+          <a href="#referencias" class="group px-2 py-5 text-sm text-slate-400 transition hover:text-white"><span class="block font-display text-xs text-navy-300">06</span>Referencias</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 1. PRESENTACIÓN DEL DILEMA ===================== -->
+    <section id="dilema" class="py-20 md:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <header class="reveal max-w-3xl">
+          <p class="font-display text-sm font-bold uppercase tracking-widest text-navy-600">Sección 01</p>
+          <h2 class="mt-3 font-display text-3xl font-extrabold tracking-tight text-navy-950 sm:text-4xl">Presentación del dilema</h2>
+          <p class="mt-5 text-lg leading-relaxed text-slate-600">
+            La inteligencia artificial ya lee radiografías, clasifica lesiones de piel y predice el deterioro de pacientes hospitalizados. Promete diagnósticos más rápidos y precisos, pero también introduce una pregunta incómoda en el consultorio: <strong class="text-navy-900">¿qué hace el médico cuando su criterio y el del algoritmo no coinciden?</strong>
+          </p>
+        </header>
+
+        <!-- Contextualización + imagen -->
+        <div class="mt-14 grid items-center gap-10 lg:grid-cols-2">
+          <div class="reveal space-y-5 leading-relaxed">
+            <h3 class="font-display text-xl font-bold text-navy-950">Contextualización</h3>
+            <p>
+              En la última década, los modelos de aprendizaje profundo alcanzaron desempeños comparables a los de especialistas en tareas acotadas, como la clasificación de cáncer de piel a partir de imágenes <a href="#ref-esteva2017" class="cite">(Esteva et al., 2017)</a>. Este avance alimentó la visión de una “medicina de alto rendimiento” en la que humanos y máquinas trabajan juntos <a href="#ref-topol2019a" class="cite">(Topol, 2019a)</a>.
+            </p>
+            <p>
+              Sin embargo, la evidencia también muestra el reverso: algoritmos ampliamente implementados que fallan al validarse fuera del entorno donde se crearon <a href="#ref-wong2021" class="cite">(Wong et al., 2021)</a>, y sistemas que reproducen desigualdades raciales presentes en los datos <a href="#ref-obermeyer2019" class="cite">(Obermeyer et al., 2019)</a>.
+            </p>
+          </div>
+          <!-- Marcador de imagen -->
+          <figure class="reveal">
+            <div class="relative grid aspect-[4/3] place-items-center overflow-hidden rounded-3xl bg-gradient-to-br from-navy-800 to-navy-950 text-center">
+              <!-- Imagen local: coloca el archivo en assets/images/figura-1.jpg -->
+              <img id="figure-1-img" src="assets/images/figura-1.jpg" alt="Médico revisando una radiografía analizada con apoyo de inteligencia artificial" class="absolute inset-0 z-10 h-full w-full object-cover" loading="lazy">
+              <div class="grid-pattern absolute inset-0"></div>
+              <div class="relative px-6">
+                <svg class="mx-auto h-14 w-14 text-navy-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/></svg>
+                <p class="mt-4 text-sm font-medium text-slate-300">Imagen sugerida: médico revisando una imagen diagnóstica asistida por IA</p>
+                <p class="mt-1 text-xs text-slate-500">Archivo pendiente: assets/images/figura-1.jpg</p>
+              </div>
+            </div>
+            <figcaption class="mt-3 text-sm text-slate-500">Figura 1. La IA como “segundo lector” en el diagnóstico por imágenes.</figcaption>
+          </figure>
+        </div>
+
+        <!-- Descripción del problema -->
+        <div class="reveal mt-20 rounded-3xl bg-slate-50 p-8 ring-1 ring-slate-200 md:p-12">
+          <h3 class="font-display text-xl font-bold text-navy-950">Descripción del problema</h3>
+          <div class="mt-6 grid gap-8 md:grid-cols-3">
+            <div>
+              <div class="grid h-11 w-11 place-items-center rounded-xl bg-navy-900 text-white">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>
+              </div>
+              <h4 class="mt-4 font-display font-semibold text-navy-950">Opacidad</h4>
+              <p class="mt-2 text-sm leading-relaxed">Muchos modelos funcionan como “cajas negras”: ofrecen un resultado sin una explicación que el médico pueda evaluar <a href="#ref-london2019" class="cite">(London, 2019)</a>.</p>
+            </div>
+            <div>
+              <div class="grid h-11 w-11 place-items-center rounded-xl bg-navy-900 text-white">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 3v18M5 8l7-5 7 5M3 14l2-6 2 6a2 2 0 0 1-4 0zM17 14l2-6 2 6a2 2 0 0 1-4 0z"/></svg>
+              </div>
+              <h4 class="mt-4 font-display font-semibold text-navy-950">Sesgo</h4>
+              <p class="mt-2 text-sm leading-relaxed">Los datos de entrenamiento pueden subrepresentar a grupos por raza, género o nivel socioeconómico, y trasladar esa desigualdad a las decisiones clínicas <a href="#ref-rajkomar2018" class="cite">(Rajkomar et al., 2018)</a>.</p>
+            </div>
+            <div>
+              <div class="grid h-11 w-11 place-items-center rounded-xl bg-navy-900 text-white">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 9v4m0 4h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>
+              </div>
+              <h4 class="mt-4 font-display font-semibold text-navy-950">Responsabilidad difusa</h4>
+              <p class="mt-2 text-sm leading-relaxed">Si el algoritmo se equivoca y el médico lo sigue, ¿quién responde? La respuesta jurídica todavía es incierta <a href="#ref-price2019" class="cite">(Price et al., 2019)</a>.</p>
+            </div>
+          </div>
+          <p class="mt-8 border-t border-slate-200 pt-6 leading-relaxed">
+            El médico queda atrapado entre dos fuerzas: <strong class="text-navy-900">acatar la IA</strong> en nombre de la eficiencia y la evidencia estadística, o <strong class="text-navy-900">sostener su juicio clínico independiente</strong>, especialmente cuando hay discrepancias. Esta tensión redefine la relación médico-paciente y diluye la responsabilidad ética y legal ante el error.
+          </p>
+        </div>
+
+        <!-- Actores involucrados -->
+        <div class="mt-20">
+          <h3 class="reveal font-display text-xl font-bold text-navy-950">Actores involucrados</h3>
+          <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            <article class="reveal rounded-2xl border-2 border-navy-900 bg-navy-900 p-6 text-white">
+              <p class="text-xs font-semibold uppercase tracking-widest text-navy-300">Protagonista</p>
+              <h4 class="mt-2 font-display text-lg font-bold">Médico clínico</h4>
+              <p class="mt-2 text-sm text-slate-300">Interpreta la recomendación, decide y asume la responsabilidad moral y legal final.</p>
+            </article>
+            <article class="reveal rounded-2xl border border-slate-200 p-6">
+              <h4 class="font-display text-lg font-bold text-navy-950">Paciente</h4>
+              <p class="mt-2 text-sm">Titular del derecho a la información, al consentimiento y a un trato digno y no discriminatorio.</p>
+            </article>
+            <article class="reveal rounded-2xl border border-slate-200 p-6">
+              <h4 class="font-display text-lg font-bold text-navy-950">Institución de salud</h4>
+              <p class="mt-2 text-sm">Adquiere, implementa y supervisa la herramienta; define protocolos de uso.</p>
+            </article>
+            <article class="reveal rounded-2xl border border-slate-200 p-6">
+              <h4 class="font-display text-lg font-bold text-navy-950">Desarrollador</h4>
+              <p class="mt-2 text-sm">Diseña, entrena y valida el modelo; decide qué datos usa y qué tan explicable es.</p>
+            </article>
+            <article class="reveal rounded-2xl border border-slate-200 p-6">
+              <h4 class="font-display text-lg font-bold text-navy-950">Estado y regulador</h4>
+              <p class="mt-2 text-sm">Establece las reglas de certificación, protección de datos y responsabilidad.</p>
+            </article>
+          </div>
+        </div>
+
+        <!-- Contextos -->
+        <div class="mt-20">
+          <h3 class="reveal font-display text-xl font-bold text-navy-950">Contexto del dilema</h3>
+          <div class="mt-6 grid gap-6 md:grid-cols-2">
+            <div class="reveal rounded-2xl bg-slate-50 p-6 ring-1 ring-slate-200">
+              <p class="font-display text-sm font-bold uppercase tracking-wider text-navy-600">Social</p>
+              <p class="mt-3 text-sm leading-relaxed">Sistemas de salud presionados por la demanda y la escasez de especialistas ven en la IA una forma de ampliar cobertura. Pero los pacientes esperan seguir siendo escuchados por una persona, no procesados por una máquina <a href="#ref-topol2019b" class="cite">(Topol, 2019b)</a>.</p>
+            </div>
+            <div class="reveal rounded-2xl bg-slate-50 p-6 ring-1 ring-slate-200">
+              <p class="font-display text-sm font-bold uppercase tracking-wider text-navy-600">Científico</p>
+              <p class="mt-3 text-sm leading-relaxed">La exactitud reportada en laboratorio no siempre se sostiene en la práctica: el modelo de sepsis de un proveedor comercial, usado en cientos de hospitales, detectó apenas un tercio de los casos al validarse externamente <a href="#ref-wong2021" class="cite">(Wong et al., 2021)</a>.</p>
+            </div>
+            <div class="reveal rounded-2xl bg-slate-50 p-6 ring-1 ring-slate-200">
+              <p class="font-display text-sm font-bold uppercase tracking-wider text-navy-600">Tecnológico</p>
+              <p class="mt-3 text-sm leading-relaxed">El aprendizaje profundo gana precisión a costa de interpretabilidad. Existe un debate abierto sobre si en decisiones de alto riesgo deben preferirse modelos interpretables por diseño <a href="#ref-rudin2019" class="cite">(Rudin, 2019)</a>.</p>
+            </div>
+            <div class="reveal rounded-2xl bg-slate-50 p-6 ring-1 ring-slate-200">
+              <p class="font-display text-sm font-bold uppercase tracking-wider text-navy-600">Jurídico</p>
+              <p class="mt-3 text-sm leading-relaxed">En Colombia, la Ley 23 de 1981 regula el acto médico y la Ley 1581 de 2012 protege los datos personales; el CONPES 3975 de 2019 orienta la política de IA. En Europa, el Reglamento (UE) 2024/1689 clasifica la IA médica como de alto riesgo y exige supervisión humana <a href="#ref-ley23" class="cite">(Ley 23, 1981)</a>; <a href="#ref-ue2024" class="cite">(Reglamento [UE] 2024/1689, 2024)</a>.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Justificación + preguntas -->
+        <div class="mt-20 grid gap-10 lg:grid-cols-5">
+          <div class="reveal lg:col-span-2">
+            <h3 class="font-display text-xl font-bold text-navy-950">¿Por qué importa?</h3>
+            <p class="mt-4 leading-relaxed">
+              Este análisis adopta la perspectiva del <strong class="text-navy-900">médico clínico</strong> porque es quien interactúa directamente con el paciente y quien, en última instancia, asume la responsabilidad moral y legal del acto médico. La IA puede recomendar, pero no firma, no consuela y no responde ante un tribunal de ética.
+            </p>
+            <p class="mt-4 leading-relaxed">
+              La Organización Mundial de la Salud advierte que la IA solo cumplirá su promesa si se pone la ética y los derechos humanos en el centro de su diseño, despliegue y uso <a href="#ref-oms2021" class="cite">(Organización Mundial de la Salud [OMS], 2021)</a>.
+            </p>
+          </div>
+          <div class="reveal rounded-3xl bg-navy-950 p-8 text-white lg:col-span-3">
+            <p class="font-display text-sm font-bold uppercase tracking-widest text-navy-300">Preguntas que guían la investigación</p>
+            <ol class="mt-6 space-y-4">
+              <li class="flex gap-4"><span class="font-display text-2xl font-extrabold text-navy-400">01</span><span class="pt-1 text-slate-200">¿Cómo equilibrar el juicio clínico y la intuición con las recomendaciones de una IA ante discrepancias?</span></li>
+              <li class="flex gap-4"><span class="font-display text-2xl font-extrabold text-navy-400">02</span><span class="pt-1 text-slate-200">¿Cómo distribuir la responsabilidad ética y legal (médico, institución, desarrollador) ante errores del algoritmo?</span></li>
+              <li class="flex gap-4"><span class="font-display text-2xl font-extrabold text-navy-400">03</span><span class="pt-1 text-slate-200">¿Cómo afecta la IA a la confianza, la empatía y la relación directa médico-paciente?</span></li>
+              <li class="flex gap-4"><span class="font-display text-2xl font-extrabold text-navy-400">04</span><span class="pt-1 text-slate-200">¿Qué desafíos éticos plantean los sesgos de datos (raza, género, nivel socioeconómico) en poblaciones vulnerables?</span></li>
+              <li class="flex gap-4"><span class="font-display text-2xl font-extrabold text-navy-400">05</span><span class="pt-1 text-slate-200">¿Qué transformaciones éticas y actitudinales debe asumir el cuerpo médico para no perder la esencia humanista?</span></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 2. ANÁLISIS INTERDISCIPLINARIO ===================== -->
+    <section id="analisis" class="bg-slate-50 py-20 md:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <header class="reveal max-w-3xl">
+          <p class="font-display text-sm font-bold uppercase tracking-widest text-navy-600">Sección 02</p>
+          <h2 class="mt-3 font-display text-3xl font-extrabold tracking-tight text-navy-950 sm:text-4xl">Análisis interdisciplinario</h2>
+          <p class="mt-5 text-lg leading-relaxed text-slate-600">
+            El dilema no se resuelve solo desde la técnica ni solo desde la moral. Requiere poner en diálogo la ética, la medicina y la ingeniería, apoyándose en fuentes académicas y normativas vigentes.
+          </p>
+        </header>
+
+        <!-- Valores en conflicto -->
+        <div class="reveal mt-14">
+          <h3 class="font-display text-xl font-bold text-navy-950">Valores en conflicto</h3>
+          <div class="mt-6 grid gap-4 md:grid-cols-3">
+            <div class="flex items-center justify-between gap-3 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
+              <span class="font-display font-semibold text-navy-900">Eficiencia</span>
+              <span class="text-xs font-bold text-slate-400">VS</span>
+              <span class="font-display font-semibold text-navy-900">Prudencia</span>
+            </div>
+            <div class="flex items-center justify-between gap-3 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
+              <span class="font-display font-semibold text-navy-900">Precisión</span>
+              <span class="text-xs font-bold text-slate-400">VS</span>
+              <span class="font-display font-semibold text-navy-900">Transparencia</span>
+            </div>
+            <div class="flex items-center justify-between gap-3 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
+              <span class="font-display font-semibold text-navy-900">Innovación</span>
+              <span class="text-xs font-bold text-slate-400">VS</span>
+              <span class="font-display font-semibold text-navy-900">Equidad</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Principios bioéticos (pestañas) -->
+        <div class="reveal mt-16" data-tabs>
+          <h3 class="font-display text-xl font-bold text-navy-950">Principios bioéticos en juego</h3>
+          <p class="mt-2 text-sm text-slate-500">Marco de Beauchamp y Childress <a href="#ref-beauchamp2019" class="cite">(2019)</a>, ampliado con el principio de explicabilidad propuesto para la IA <a href="#ref-floridi2018" class="cite">(Floridi et al., 2018)</a>.</p>
+
+          <div class="mt-6 flex flex-wrap gap-2" role="tablist">
+            <button data-tab="beneficencia" role="tab" aria-selected="true" class="rounded-full bg-navy-900 px-5 py-2.5 text-sm font-semibold text-white ring-1 ring-navy-900 transition">Beneficencia</button>
+            <button data-tab="nomaleficencia" role="tab" aria-selected="false" class="rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-navy-900 ring-1 ring-slate-200 transition hover:ring-navy-400">No maleficencia</button>
+            <button data-tab="autonomia" role="tab" aria-selected="false" class="rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-navy-900 ring-1 ring-slate-200 transition hover:ring-navy-400">Autonomía</button>
+            <button data-tab="justicia" role="tab" aria-selected="false" class="rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-navy-900 ring-1 ring-slate-200 transition hover:ring-navy-400">Justicia</button>
+            <button data-tab="explicabilidad" role="tab" aria-selected="false" class="rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-navy-900 ring-1 ring-slate-200 transition hover:ring-navy-400">Explicabilidad</button>
+          </div>
+
+          <div class="mt-6 rounded-3xl bg-white p-8 shadow-sm ring-1 ring-slate-200 md:p-10">
+            <div data-panel="beneficencia" class="grid gap-8 md:grid-cols-2">
+              <div>
+                <h4 class="font-display text-2xl font-bold text-navy-950">Beneficencia</h4>
+                <p class="mt-3 leading-relaxed">Obligación de actuar en beneficio del paciente. La IA puede detectar patrones invisibles al ojo humano, reducir tiempos diagnósticos y liberar tiempo para el encuentro clínico <a href="#ref-topol2019b" class="cite">(Topol, 2019b)</a>.</p>
+              </div>
+              <div class="rounded-2xl bg-navy-50 p-6">
+                <p class="text-xs font-bold uppercase tracking-wider text-navy-600">Tensión</p>
+                <p class="mt-2 text-sm leading-relaxed">Ignorar una herramienta que mejora resultados podría ser, en sí mismo, una falta a la beneficencia. Pero el beneficio debe demostrarse en la población real atendida, no solo en el conjunto de prueba.</p>
+              </div>
+            </div>
+            <div data-panel="nomaleficencia" class="grid hidden gap-8 md:grid-cols-2">
+              <div>
+                <h4 class="font-display text-2xl font-bold text-navy-950">No maleficencia</h4>
+                <p class="mt-3 leading-relaxed">Primero, no dañar. El “sesgo de automatización” lleva a los profesionales a aceptar sugerencias erróneas de los sistemas de apoyo a la decisión, incluso cuando su propio juicio era correcto <a href="#ref-goddard2012" class="cite">(Goddard et al., 2012)</a>.</p>
+              </div>
+              <div class="rounded-2xl bg-navy-50 p-6">
+                <p class="text-xs font-bold uppercase tracking-wider text-navy-600">Tensión</p>
+                <p class="mt-2 text-sm leading-relaxed">Un modelo con alta exactitud promedio puede fallar sistemáticamente en subgrupos. El daño no siempre es visible en las métricas globales.</p>
+              </div>
+            </div>
+            <div data-panel="autonomia" class="grid hidden gap-8 md:grid-cols-2">
+              <div>
+                <h4 class="font-display text-2xl font-bold text-navy-950">Autonomía</h4>
+                <p class="mt-3 leading-relaxed">Doble dimensión: la del paciente, que tiene derecho a saber que una IA participa en su diagnóstico y a consentir; y la del médico, cuya independencia de criterio no debe subordinarse a una recomendación que no puede comprender <a href="#ref-grote2020" class="cite">(Grote &amp; Berens, 2020)</a>.</p>
+              </div>
+              <div class="rounded-2xl bg-navy-50 p-6">
+                <p class="text-xs font-bold uppercase tracking-wider text-navy-600">Tensión</p>
+                <p class="mt-2 text-sm leading-relaxed">¿Puede haber consentimiento informado si ni el médico puede explicar cómo llegó el sistema a su conclusión?</p>
+              </div>
+            </div>
+            <div data-panel="justicia" class="grid hidden gap-8 md:grid-cols-2">
+              <div>
+                <h4 class="font-display text-2xl font-bold text-navy-950">Justicia</h4>
+                <p class="mt-3 leading-relaxed">Distribución equitativa de beneficios y riesgos. Un algoritmo usado en EE. UU. para asignar programas de cuidado subestimaba la necesidad de pacientes negros porque usaba el gasto en salud como indicador de enfermedad <a href="#ref-obermeyer2019" class="cite">(Obermeyer et al., 2019)</a>.</p>
+              </div>
+              <div class="rounded-2xl bg-navy-50 p-6">
+                <p class="text-xs font-bold uppercase tracking-wider text-navy-600">Tensión</p>
+                <p class="mt-2 text-sm leading-relaxed">Los modelos dermatológicos entrenados mayoritariamente con pieles claras pueden rendir peor en pieles oscuras, ampliando brechas existentes <a href="#ref-adamson2018" class="cite">(Adamson &amp; Smith, 2018)</a>.</p>
+              </div>
+            </div>
+            <div data-panel="explicabilidad" class="grid hidden gap-8 md:grid-cols-2">
+              <div>
+                <h4 class="font-display text-2xl font-bold text-navy-950">Explicabilidad</h4>
+                <p class="mt-3 leading-relaxed">Propuesto como quinto principio para la IA: combina inteligibilidad (¿cómo funciona?) y rendición de cuentas (¿quién responde?) <a href="#ref-floridi2018" class="cite">(Floridi et al., 2018)</a>.</p>
+              </div>
+              <div class="rounded-2xl bg-navy-50 p-6">
+                <p class="text-xs font-bold uppercase tracking-wider text-navy-600">Tensión</p>
+                <p class="mt-2 text-sm leading-relaxed">London (2019) recuerda que la medicina ya usa intervenciones eficaces cuyo mecanismo no se comprende del todo, y propone exigir validación empírica rigurosa más que explicación causal.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Teorías éticas -->
+        <div class="mt-16">
+          <h3 class="reveal font-display text-xl font-bold text-navy-950">Teorías éticas relacionadas</h3>
+          <div class="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <article class="reveal rounded-2xl bg-white p-6 ring-1 ring-slate-200">
+              <p class="font-display text-3xl font-extrabold text-navy-200">01</p>
+              <h4 class="mt-2 font-display font-bold text-navy-950">Utilitarismo</h4>
+              <p class="mt-2 text-sm leading-relaxed">Justifica la IA si maximiza el bienestar agregado. Riesgo: sacrificar a minorías mal representadas en nombre del promedio.</p>
+            </article>
+            <article class="reveal rounded-2xl bg-white p-6 ring-1 ring-slate-200">
+              <p class="font-display text-3xl font-extrabold text-navy-200">02</p>
+              <h4 class="mt-2 font-display font-bold text-navy-950">Deontología</h4>
+              <p class="mt-2 text-sm leading-relaxed">Hay deberes que no se negocian: informar, respetar la dignidad, no tratar al paciente como un simple dato.</p>
+            </article>
+            <article class="reveal rounded-2xl bg-white p-6 ring-1 ring-slate-200">
+              <p class="font-display text-3xl font-extrabold text-navy-200">03</p>
+              <h4 class="mt-2 font-display font-bold text-navy-950">Ética de virtudes</h4>
+              <p class="mt-2 text-sm leading-relaxed">La prudencia (<em>phrónesis</em>) del médico es insustituible: saber cuándo y cómo aplicar la evidencia al caso concreto <a href="#ref-pellegrino1993" class="cite">(Pellegrino &amp; Thomasma, 1993)</a>.</p>
+            </article>
+            <article class="reveal rounded-2xl bg-white p-6 ring-1 ring-slate-200">
+              <p class="font-display text-3xl font-extrabold text-navy-200">04</p>
+              <h4 class="mt-2 font-display font-bold text-navy-950">Ética de la responsabilidad</h4>
+              <p class="mt-2 text-sm leading-relaxed">Ante tecnologías de efectos inciertos, Jonas propone obrar con cautela y responder por las consecuencias futuras <a href="#ref-jonas1995" class="cite">(Jonas, 1995)</a>.</p>
+            </article>
+          </div>
+        </div>
+
+        <!-- Perspectiva disciplinar -->
+        <div class="mt-16">
+          <h3 class="reveal font-display text-xl font-bold text-navy-950">Perspectiva disciplinar</h3>
+          <div class="mt-6 grid gap-6 lg:grid-cols-2">
+            <article class="reveal overflow-hidden rounded-3xl bg-white ring-1 ring-slate-200">
+              <div class="flex items-center gap-4 bg-navy-900 px-8 py-6 text-white">
+                <svg class="h-8 w-8 text-navy-200" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M6 3v6a6 6 0 0 0 12 0V3M12 15v2a4 4 0 0 0 8 0v-1"/><circle cx="20" cy="14" r="2"/></svg>
+                <h4 class="font-display text-xl font-bold">Medicina</h4>
+              </div>
+              <ul class="space-y-4 p-8 text-sm leading-relaxed">
+                <li class="flex gap-3"><span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-navy-500"></span><span>El acto médico es indelegable: el médico responde por la decisión final, y la Ley 23 de 1981 le exige no exponer al paciente a riesgos injustificados y obtener su consentimiento (art. 15) <a href="#ref-ley23" class="cite">(Ley 23, 1981)</a>.</span></li>
+                <li class="flex gap-3"><span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-navy-500"></span><span>La IA debe integrarse como apoyo a la decisión, no como sustituto; el riesgo es que la herramienta moldee la práctica en lugar de servirla <a href="#ref-char2018" class="cite">(Char et al., 2018)</a>.</span></li>
+                <li class="flex gap-3"><span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-navy-500"></span><span>Bajo el estándar actual de responsabilidad, el médico puede quedar más protegido siguiendo el estándar de cuidado que siguiendo a la IA, lo que desincentiva su uso incluso cuando acierta <a href="#ref-price2019" class="cite">(Price et al., 2019)</a>.</span></li>
+              </ul>
+            </article>
+            <article class="reveal overflow-hidden rounded-3xl bg-white ring-1 ring-slate-200">
+              <div class="flex items-center gap-4 bg-slate-800 px-8 py-6 text-white">
+                <svg class="h-8 w-8 text-slate-300" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 9h6v6H9zM9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg>
+                <h4 class="font-display text-xl font-bold">Ingeniería</h4>
+              </div>
+              <ul class="space-y-4 p-8 text-sm leading-relaxed">
+                <li class="flex gap-3"><span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-slate-500"></span><span>Técnicas de explicabilidad <em>post hoc</em> (LIME, SHAP, mapas de calor) aproximan por qué un modelo decide, pero pueden dar una falsa sensación de comprensión <a href="#ref-rudin2019" class="cite">(Rudin, 2019)</a>.</span></li>
+                <li class="flex gap-3"><span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-slate-500"></span><span>La equidad algorítmica es un problema de diseño: elección de la variable objetivo, auditoría por subgrupos y datos representativos <a href="#ref-obermeyer2019" class="cite">(Obermeyer et al., 2019)</a>; <a href="#ref-rajkomar2018" class="cite">(Rajkomar et al., 2018)</a>.</span></li>
+                <li class="flex gap-3"><span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-slate-500"></span><span>La validación externa y el monitoreo continuo tras el despliegue son condiciones mínimas de seguridad, no extras opcionales <a href="#ref-wong2021" class="cite">(Wong et al., 2021)</a>.</span></li>
+              </ul>
+            </article>
+          </div>
+        </div>
+
+        <!-- Marco normativo -->
+        <div class="reveal mt-16">
+          <h3 class="font-display text-xl font-bold text-navy-950">Marco normativo vigente</h3>
+          <div class="mt-6 overflow-x-auto rounded-2xl bg-white ring-1 ring-slate-200">
+            <table class="w-full min-w-[640px] text-left text-sm">
+              <thead class="bg-navy-950 text-white">
+                <tr>
+                  <th class="px-6 py-4 font-display font-semibold">Norma / documento</th>
+                  <th class="px-6 py-4 font-display font-semibold">Ámbito</th>
+                  <th class="px-6 py-4 font-display font-semibold">Aporte al dilema</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200">
+                <tr><td class="px-6 py-4 font-medium text-navy-900">Ley 23 de 1981</td><td class="px-6 py-4">Colombia</td><td class="px-6 py-4">Código de ética médica: responsabilidad del médico y consentimiento informado.</td></tr>
+                <tr><td class="px-6 py-4 font-medium text-navy-900">Ley Estatutaria 1581 de 2012</td><td class="px-6 py-4">Colombia</td><td class="px-6 py-4">Protección de datos personales; los datos de salud son sensibles <a href="#ref-ley1581" class="cite">(Ley 1581, 2012)</a>.</td></tr>
+                <tr><td class="px-6 py-4 font-medium text-navy-900">CONPES 3975 de 2019</td><td class="px-6 py-4">Colombia</td><td class="px-6 py-4">Política de transformación digital e IA; marco ético para su adopción <a href="#ref-conpes3975" class="cite">(CONPES, 2019)</a>.</td></tr>
+                <tr><td class="px-6 py-4 font-medium text-navy-900">Guía de ética y gobernanza de IA en salud</td><td class="px-6 py-4">OMS</td><td class="px-6 py-4">Seis principios: autonomía, bienestar, transparencia, responsabilidad, equidad y sostenibilidad <a href="#ref-oms2021" class="cite">(OMS, 2021)</a>.</td></tr>
+                <tr><td class="px-6 py-4 font-medium text-navy-900">Recomendación sobre la ética de la IA</td><td class="px-6 py-4">UNESCO</td><td class="px-6 py-4">Supervisión y determinación humanas; la IA no debe desplazar la responsabilidad última de las personas <a href="#ref-unesco2021" class="cite">(UNESCO, 2021)</a>.</td></tr>
+                <tr><td class="px-6 py-4 font-medium text-navy-900">Reglamento (UE) 2024/1689</td><td class="px-6 py-4">Unión Europea</td><td class="px-6 py-4">IA médica como sistema de alto riesgo; obligación de supervisión humana (art. 14).</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 3. LA VOZ DE LA EXPERIENCIA ===================== -->
+    <section id="experiencia" class="relative overflow-hidden bg-navy-950 py-20 text-white md:py-28">
+      <div class="grid-pattern absolute inset-0"></div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <header class="reveal max-w-3xl">
+          <p class="font-display text-sm font-bold uppercase tracking-widest text-navy-300">Sección 03</p>
+          <h2 class="mt-3 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">La voz de la experiencia</h2>
+          <p class="mt-5 text-lg leading-relaxed text-slate-300">
+            Médicos que han reflexionado públicamente sobre la IA y la tecnología en la práctica clínica. Sus planteamientos se recogen de libros, ensayos periodísticos y artículos científicos publicados.
+          </p>
+          <p class="mt-4 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-xs leading-relaxed text-slate-400">
+            Nota metodológica: no se realizó una entrevista directa. Los testimonios son <strong class="text-slate-200">paráfrasis fieles</strong> de fuentes publicadas, cada una enlazada a su referencia completa.
+          </p>
+        </header>
+
+        <!-- Video destacado (marcador) -->
+        <div class="reveal mt-12 grid items-center gap-8 lg:grid-cols-5">
+          <div class="lg:col-span-3">
+            <div class="group relative grid aspect-video place-items-center overflow-hidden rounded-3xl bg-gradient-to-br from-navy-700 to-navy-900 ring-1 ring-white/10">
+              <!-- Video local: coloca el archivo en assets/video/entrevista.mp4 -->
+              <video id="experience-video" class="absolute inset-0 z-10 hidden h-full w-full bg-black object-contain" controls preload="metadata" playsinline>
+                <source src="assets/video/entrevista.mp4" type="video/mp4">
+                Tu navegador no soporta video HTML5.
+              </video>
+              <div id="video-placeholder" class="text-center">
+                <span class="mx-auto grid h-20 w-20 place-items-center rounded-full bg-white text-navy-950 shadow-2xl transition group-hover:scale-110">
+                  <svg class="ml-1 h-8 w-8" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </span>
+                <p class="mt-5 px-6 text-sm text-slate-300">Espacio para video: entrevista o conferencia pública de Eric Topol sobre <em>Deep Medicine</em></p>
+                <p class="mt-1 px-6 text-xs text-slate-500">Archivo pendiente: assets/video/entrevista.mp4</p>
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-2">
+            <p class="font-display text-sm font-bold uppercase tracking-widest text-navy-300">Recurso audiovisual</p>
+            <h3 class="mt-3 font-display text-2xl font-bold">“Devolverle el tiempo al médico”</h3>
+            <p class="mt-4 leading-relaxed text-slate-300">
+              El cardiólogo Eric Topol sostiene que el mayor aporte de la IA no será reemplazar al médico, sino liberarlo de tareas mecánicas para devolverle lo que llama “el regalo del tiempo” con el paciente <a href="#ref-topol2019b" class="cite !text-navy-200">(Topol, 2019b)</a>.
+            </p>
+          </div>
+        </div>
+
+        <!-- Testimonios -->
+        <div class="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <figure class="reveal flex flex-col rounded-3xl bg-white/5 p-7 ring-1 ring-white/10">
+            <svg class="h-8 w-8 text-navy-400" fill="currentColor" viewBox="0 0 24 24"><path d="M9.6 6C6.5 7.4 4.5 10.2 4.5 13.6V18h6v-6h-3c0-2 1.2-3.7 3-4.6zM19.5 6c-3.1 1.4-5.1 4.2-5.1 7.6V18h6v-6h-3c0-2 1.2-3.7 3-4.6z"/></svg>
+            <blockquote class="mt-4 flex-1 leading-relaxed text-slate-200">Los médicos pasan cada vez más tiempo atendiendo al “iPaciente” de la pantalla y menos al paciente real que tienen enfrente; la tecnología debería devolver la atención a la cabecera de la cama.</blockquote>
+            <figcaption class="mt-6 border-t border-white/10 pt-4 text-sm">
+              <p class="font-display font-semibold">Abraham Verghese</p>
+              <p class="text-slate-400">Internista, Universidad de Stanford · <a href="#ref-verghese2018" class="cite !text-navy-200">Verghese (2018)</a></p>
+            </figcaption>
+          </figure>
+
+          <figure class="reveal flex flex-col rounded-3xl bg-white/5 p-7 ring-1 ring-white/10">
+            <svg class="h-8 w-8 text-navy-400" fill="currentColor" viewBox="0 0 24 24"><path d="M9.6 6C6.5 7.4 4.5 10.2 4.5 13.6V18h6v-6h-3c0-2 1.2-3.7 3-4.6zM19.5 6c-3.1 1.4-5.1 4.2-5.1 7.6V18h6v-6h-3c0-2 1.2-3.7 3-4.6z"/></svg>
+            <blockquote class="mt-4 flex-1 leading-relaxed text-slate-200">Los sistemas digitales impuestos sin pensar en el trabajo clínico terminaron sumando carga y agotamiento; la tecnología debe adaptarse al cuidado del paciente, no al revés.</blockquote>
+            <figcaption class="mt-6 border-t border-white/10 pt-4 text-sm">
+              <p class="font-display font-semibold">Atul Gawande</p>
+              <p class="text-slate-400">Cirujano y escritor · <a href="#ref-gawande2018" class="cite !text-navy-200">Gawande (2018)</a></p>
+            </figcaption>
+          </figure>
+
+          <figure class="reveal flex flex-col rounded-3xl bg-white/5 p-7 ring-1 ring-white/10">
+            <svg class="h-8 w-8 text-navy-400" fill="currentColor" viewBox="0 0 24 24"><path d="M9.6 6C6.5 7.4 4.5 10.2 4.5 13.6V18h6v-6h-3c0-2 1.2-3.7 3-4.6zM19.5 6c-3.1 1.4-5.1 4.2-5.1 7.6V18h6v-6h-3c0-2 1.2-3.7 3-4.6z"/></svg>
+            <blockquote class="mt-4 flex-1 leading-relaxed text-slate-200">El sesgo del algoritmo no venía de usar la raza como variable, sino de predecir el gasto en salud como si fuera necesidad médica: quien históricamente recibió menos atención parecía “más sano”.</blockquote>
+            <figcaption class="mt-6 border-t border-white/10 pt-4 text-sm">
+              <p class="font-display font-semibold">Ziad Obermeyer</p>
+              <p class="text-slate-400">Médico de urgencias e investigador, UC Berkeley · <a href="#ref-obermeyer2019" class="cite !text-navy-200">Obermeyer et al. (2019)</a></p>
+            </figcaption>
+          </figure>
+
+          <figure class="reveal flex flex-col rounded-3xl bg-white/5 p-7 ring-1 ring-white/10">
+            <svg class="h-8 w-8 text-navy-400" fill="currentColor" viewBox="0 0 24 24"><path d="M9.6 6C6.5 7.4 4.5 10.2 4.5 13.6V18h6v-6h-3c0-2 1.2-3.7 3-4.6zM19.5 6c-3.1 1.4-5.1 4.2-5.1 7.6V18h6v-6h-3c0-2 1.2-3.7 3-4.6z"/></svg>
+            <blockquote class="mt-4 flex-1 leading-relaxed text-slate-200">Los modelos de lenguaje pueden razonar sobre casos clínicos de forma sorprendente, pero también se equivocan con total seguridad; toda respuesta debe ser verificada por un profesional.</blockquote>
+            <figcaption class="mt-6 border-t border-white/10 pt-4 text-sm">
+              <p class="font-display font-semibold">Isaac Kohane</p>
+              <p class="text-slate-400">Médico e informático biomédico, Harvard · <a href="#ref-lee2023" class="cite !text-navy-200">Lee et al. (2023)</a></p>
+            </figcaption>
+          </figure>
+
+          <figure class="reveal flex flex-col rounded-3xl bg-white/5 p-7 ring-1 ring-white/10">
+            <svg class="h-8 w-8 text-navy-400" fill="currentColor" viewBox="0 0 24 24"><path d="M9.6 6C6.5 7.4 4.5 10.2 4.5 13.6V18h6v-6h-3c0-2 1.2-3.7 3-4.6zM19.5 6c-3.1 1.4-5.1 4.2-5.1 7.6V18h6v-6h-3c0-2 1.2-3.7 3-4.6z"/></svg>
+            <blockquote class="mt-4 flex-1 leading-relaxed text-slate-200">Un modelo de alerta de sepsis implementado en cientos de hospitales, al evaluarse de forma independiente, no detectó la mayoría de los casos y generó numerosas falsas alarmas: los algoritmos propietarios necesitan validación externa.</blockquote>
+            <figcaption class="mt-6 border-t border-white/10 pt-4 text-sm">
+              <p class="font-display font-semibold">Karandeep Singh</p>
+              <p class="text-slate-400">Internista e investigador, Universidad de Michigan · <a href="#ref-wong2021" class="cite !text-navy-200">Wong et al. (2021)</a></p>
+            </figcaption>
+          </figure>
+
+          <figure class="reveal flex flex-col rounded-3xl bg-white p-7 text-navy-950">
+            <p class="font-display text-sm font-bold uppercase tracking-widest text-navy-600">Dato que interpela</p>
+            <p class="mt-4 font-display text-5xl font-extrabold">79%</p>
+            <p class="mt-3 flex-1 text-sm leading-relaxed text-slate-600">de las evaluaciones de profesionales de salud prefirieron las respuestas de un chatbot frente a las de médicos a preguntas de pacientes en un foro público, y las calificaron como más empáticas. ¿Qué significa esto para la relación médico-paciente?</p>
+            <figcaption class="mt-6 border-t border-slate-200 pt-4 text-sm text-slate-500"><a href="#ref-ayers2023" class="cite">Ayers et al. (2023)</a></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 4. DELIBERACIÓN ÉTICA ===================== -->
+    <section id="deliberacion" class="py-20 md:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <header class="reveal max-w-3xl">
+          <p class="font-display text-sm font-bold uppercase tracking-widest text-navy-600">Sección 04</p>
+          <h2 class="mt-3 font-display text-3xl font-extrabold tracking-tight text-navy-950 sm:text-4xl">Deliberación ética</h2>
+          <p class="mt-5 text-lg leading-relaxed text-slate-600">
+            Deliberar no es elegir un bando, sino identificar los conflictos, sopesar las posiciones razonables y construir una postura que pueda sostenerse ante el paciente, los colegas y la ley.
+          </p>
+        </header>
+
+        <!-- Podcast -->
+        <div class="reveal mt-14 overflow-hidden rounded-3xl bg-navy-950 text-white">
+          <div class="grid lg:grid-cols-5">
+            <div class="relative grid place-items-center bg-gradient-to-br from-navy-600 to-navy-900 p-10 lg:col-span-2">
+              <div class="grid-pattern absolute inset-0"></div>
+              <div class="relative text-center">
+                <svg class="mx-auto h-16 w-16 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 17v5M8 22h8"/></svg>
+                <p class="mt-4 font-display text-xs font-bold uppercase tracking-widest text-navy-200">Podcast · Episodio 1</p>
+                <p class="mt-2 font-display text-2xl font-extrabold">¿Quién firma el diagnóstico?</p>
+                <p class="mt-1 text-sm text-navy-200">Duración estimada: 8–10 min</p>
+              </div>
+            </div>
+            <div class="p-8 lg:col-span-3 lg:p-10">
+              <p class="text-sm leading-relaxed text-slate-300">La deliberación se presenta en formato podcast. A continuación el reproductor (marcador) y el guion completo por bloques.</p>
+              <!-- Reemplazar src por el archivo de audio final -->
+              <div class="mt-6 rounded-2xl bg-white/5 p-4 ring-1 ring-white/10">
+                <audio controls class="w-full" preload="none">
+                  <source src="assets/audio/podcast-episodio-1.mp3" type="audio/mpeg">
+                  Tu navegador no soporta audio HTML5.
+                </audio>
+                <p class="mt-2 text-xs text-slate-500">Archivo pendiente: assets/audio/podcast-episodio-1.mp3</p>
+              </div>
+
+              <!-- Guion -->
+              <div class="mt-6 divide-y divide-white/10 rounded-2xl ring-1 ring-white/10">
+                <div class="accordion-item">
+                  <button class="accordion-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-display font-semibold" aria-expanded="false">
+                    <span><span class="mr-2 text-navy-300">00:00</span> Apertura: un caso en urgencias</span>
+                    <svg class="accordion-icon h-5 w-5 shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+                  </button>
+                  <div class="accordion-panel"><div><p class="px-5 pb-5 text-sm leading-relaxed text-slate-300"><strong class="text-white">Narrador:</strong> Son las tres de la mañana. Una paciente de 58 años consulta por dolor torácico atípico. El sistema de apoyo diagnóstico la clasifica como “bajo riesgo”. La médica de turno tiene una intuición distinta: algo en el relato no encaja. ¿Le da el alta, como sugiere el algoritmo, o pide más estudios? Hoy vamos a deliberar sobre esa decisión.</p></div></div>
+                </div>
+                <div class="accordion-item">
+                  <button class="accordion-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-display font-semibold" aria-expanded="false">
+                    <span><span class="mr-2 text-navy-300">01:30</span> Los conflictos en juego</span>
+                    <svg class="accordion-icon h-5 w-5 shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+                  </button>
+                  <div class="accordion-panel"><div><p class="px-5 pb-5 text-sm leading-relaxed text-slate-300"><strong class="text-white">Narrador:</strong> Aquí chocan beneficencia y no maleficencia: la herramienta probablemente acierta más veces que una persona cansada, pero si se equivoca, el daño es grave. Choca también la autonomía profesional con la presión institucional. Y aparece la justicia: ¿fue entrenado el modelo con pacientes como ella? Sabemos que el dolor torácico en mujeres se presenta muchas veces de forma atípica.</p></div></div>
+                </div>
+                <div class="accordion-item">
+                  <button class="accordion-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-display font-semibold" aria-expanded="false">
+                    <span><span class="mr-2 text-navy-300">03:30</span> Dos posiciones enfrentadas</span>
+                    <svg class="accordion-icon h-5 w-5 shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+                  </button>
+                  <div class="accordion-panel"><div><p class="px-5 pb-5 text-sm leading-relaxed text-slate-300"><strong class="text-white">Voz 1 (pro-algoritmo):</strong> “Los datos no se cansan ni tienen prejuicios personales. Si el sistema está validado, desconfiar de él es dejar que el ego pese más que la evidencia.”<br><br><strong class="text-white">Voz 2 (pro-juicio clínico):</strong> “El algoritmo no vio a la paciente, no escuchó cómo describió el dolor. Seguirlo sin pensar es sesgo de automatización, y la firma en la historia clínica sigue siendo mía.”</p></div></div>
+                </div>
+                <div class="accordion-item">
+                  <button class="accordion-trigger flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-display font-semibold" aria-expanded="false">
+                    <span><span class="mr-2 text-navy-300">06:00</span> Postura y cierre</span>
+                    <svg class="accordion-icon h-5 w-5 shrink-0 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+                  </button>
+                  <div class="accordion-panel"><div><p class="px-5 pb-5 text-sm leading-relaxed text-slate-300"><strong class="text-white">Narrador:</strong> Mi postura es que la médica debe tratar la discrepancia como una señal, no como un error del uno o del otro. Documenta su razonamiento, solicita los estudios adicionales y explica a la paciente que una herramienta participó en la evaluación. La IA informa; la persona decide y responde. Esa es la diferencia entre usar una herramienta y abdicar ante ella.</p></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Conflictos y posiciones -->
+        <div class="mt-16 grid gap-6 lg:grid-cols-3">
+          <article class="reveal rounded-3xl bg-slate-50 p-8 ring-1 ring-slate-200">
+            <p class="font-display text-xs font-bold uppercase tracking-widest text-slate-500">Posición A</p>
+            <h3 class="mt-2 font-display text-xl font-bold text-navy-950">Deferencia al algoritmo</h3>
+            <p class="mt-3 text-sm leading-relaxed">Si un sistema demuestra mejor desempeño que el promedio humano, seguirlo maximiza el bienestar (utilitarismo) y reduce la variabilidad clínica.</p>
+            <p class="mt-4 text-sm"><span class="font-semibold text-navy-900">Límite:</span> ignora el sesgo de automatización <a href="#ref-goddard2012" class="cite">(Goddard et al., 2012)</a> y los fallos en subgrupos.</p>
+          </article>
+          <article class="reveal rounded-3xl bg-slate-50 p-8 ring-1 ring-slate-200">
+            <p class="font-display text-xs font-bold uppercase tracking-widest text-slate-500">Posición B</p>
+            <h3 class="mt-2 font-display text-xl font-bold text-navy-950">Primacía del juicio clínico</h3>
+            <p class="mt-3 text-sm leading-relaxed">El médico conoce el contexto, escucha y responde legalmente; por tanto, su criterio siempre debe prevalecer (deontología, ética de virtudes).</p>
+            <p class="mt-4 text-sm"><span class="font-semibold text-navy-900">Límite:</span> puede convertir la intuición en dogma y desperdiciar evidencia útil para el paciente.</p>
+          </article>
+          <article class="reveal rounded-3xl bg-navy-900 p-8 text-white">
+            <p class="font-display text-xs font-bold uppercase tracking-widest text-navy-300">Postura propia</p>
+            <h3 class="mt-2 font-display text-xl font-bold">Supervisión humana significativa</h3>
+            <p class="mt-3 text-sm leading-relaxed text-slate-300">La IA es un segundo lector, no un juez. Toda discrepancia exige razonamiento documentado; ninguna recomendación se aplica sin que el médico pueda justificarla ante el paciente <a href="#ref-unesco2021" class="cite !text-navy-200">(UNESCO, 2021)</a>.</p>
+          </article>
+        </div>
+
+        <!-- Infografía: relación entre principios -->
+        <div class="reveal mt-16 rounded-3xl bg-white p-8 ring-1 ring-slate-200 md:p-12">
+          <div class="grid items-center gap-10 lg:grid-cols-2">
+            <div>
+              <p class="font-display text-sm font-bold uppercase tracking-widest text-navy-600">Infografía</p>
+              <h3 class="mt-2 font-display text-2xl font-bold text-navy-950">Cómo se relacionan los principios</h3>
+              <p class="mt-4 leading-relaxed">Los cuatro principios clásicos no operan aislados. La <strong class="text-navy-900">explicabilidad</strong> funciona como condición habilitante: sin ella no hay consentimiento real (autonomía), no se pueden detectar sesgos (justicia), no se previenen daños (no maleficencia) ni se puede verificar el beneficio (beneficencia).</p>
+              <p class="mt-4 leading-relaxed">En el centro está el <strong class="text-navy-900">médico</strong>, que pondera y responde por la decisión final.</p>
+            </div>
+            <svg viewBox="0 0 360 360" class="mx-auto w-full max-w-sm" role="img" aria-label="Diagrama: el médico en el centro rodeado de cuatro principios bioéticos conectados por la explicabilidad">
+              <circle cx="180" cy="180" r="120" fill="none" stroke="#b6c5e6" stroke-width="2" stroke-dasharray="6 6"/>
+              <text x="180" y="52" text-anchor="middle" font-family="Inter" font-size="11" fill="#5e7cbb" font-weight="600">EXPLICABILIDAD</text>
+              <g font-family="Plus Jakarta Sans, Inter" font-weight="700" font-size="12" text-anchor="middle">
+                <circle cx="180" cy="60" r="0"/>
+                <circle cx="180" cy="80" r="38" fill="#121f3d"/><text x="180" y="84" fill="#fff">Beneficencia</text>
+                <circle cx="280" cy="180" r="38" fill="#243d72"/><text x="280" y="177" fill="#fff">No</text><text x="280" y="191" fill="#fff">maleficencia</text>
+                <circle cx="180" cy="280" r="38" fill="#121f3d"/><text x="180" y="284" fill="#fff">Justicia</text>
+                <circle cx="80" cy="180" r="38" fill="#243d72"/><text x="80" y="184" fill="#fff">Autonomía</text>
+                <circle cx="180" cy="180" r="44" fill="#eef2fa" stroke="#121f3d" stroke-width="2"/><text x="180" y="184" fill="#121f3d" font-size="14">Médico</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Respuestas a la batería de preguntas -->
+        <div class="mt-16">
+          <h3 class="reveal font-display text-xl font-bold text-navy-950">Respuesta a las preguntas guía</h3>
+          <div class="mt-6 grid gap-5 md:grid-cols-2">
+            <article class="reveal rounded-2xl border border-slate-200 p-6">
+              <p class="font-display text-sm font-bold text-navy-600">01 · Juicio clínico vs. IA</p>
+              <p class="mt-2 text-sm leading-relaxed">La discrepancia se trata como hallazgo clínico: se revisa el caso, se buscan datos adicionales y se documenta el razonamiento. Ni obediencia automática ni rechazo por defecto.</p>
+            </article>
+            <article class="reveal rounded-2xl border border-slate-200 p-6">
+              <p class="font-display text-sm font-bold text-navy-600">02 · Distribución de la responsabilidad</p>
+              <p class="mt-2 text-sm leading-relaxed">Responsabilidad compartida y escalonada: el desarrollador por el diseño y la validación, la institución por la implementación y el monitoreo, el médico por el uso razonable en el caso concreto <a href="#ref-price2019" class="cite">(Price et al., 2019)</a>; <a href="#ref-oms2021" class="cite">(OMS, 2021)</a>.</p>
+            </article>
+            <article class="reveal rounded-2xl border border-slate-200 p-6">
+              <p class="font-display text-sm font-bold text-navy-600">03 · Confianza y relación médico-paciente</p>
+              <p class="mt-2 text-sm leading-relaxed">Si la IA absorbe el trabajo administrativo, puede devolver tiempo al encuentro; si se usa para acortar consultas, erosiona la confianza. La transparencia con el paciente es innegociable <a href="#ref-topol2019b" class="cite">(Topol, 2019b)</a>.</p>
+            </article>
+            <article class="reveal rounded-2xl border border-slate-200 p-6">
+              <p class="font-display text-sm font-bold text-navy-600">04 · Sesgos y poblaciones vulnerables</p>
+              <p class="mt-2 text-sm leading-relaxed">Exigir auditorías por subgrupo antes y después del despliegue, datos locales representativos y validación en la población colombiana, no solo en la de origen del modelo <a href="#ref-rajkomar2018" class="cite">(Rajkomar et al., 2018)</a>.</p>
+            </article>
+            <article class="reveal rounded-2xl border border-slate-200 p-6 md:col-span-2">
+              <p class="font-display text-sm font-bold text-navy-600">05 · Transformación del cuerpo médico</p>
+              <p class="mt-2 text-sm leading-relaxed">Formación en alfabetización algorítmica (saber qué hace y qué no hace un modelo), cultivo de la prudencia y la humildad epistémica, y una defensa activa del tiempo de escucha como núcleo del acto médico <a href="#ref-pellegrino1993" class="cite">(Pellegrino &amp; Thomasma, 1993)</a>.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 5. CONCLUSIONES ===================== -->
+    <section id="conclusiones" class="bg-slate-50 py-20 md:py-28">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <header class="reveal max-w-3xl">
+          <p class="font-display text-sm font-bold uppercase tracking-widest text-navy-600">Sección 05</p>
+          <h2 class="mt-3 font-display text-3xl font-extrabold tracking-tight text-navy-950 sm:text-4xl">Conclusiones</h2>
+        </header>
+
+        <blockquote class="reveal mt-10 rounded-3xl bg-navy-950 p-8 font-display text-xl font-semibold leading-relaxed text-white md:p-12 md:text-2xl">
+          “La IA es una herramienta complementaria, no un reemplazo. Exige gobernanza ética que preserve la autonomía médica, la prudencia, la equidad, la transparencia y el sentido humanista de la medicina.”
+        </blockquote>
+
+        <div class="mt-12 grid gap-6 md:grid-cols-3">
+          <article class="reveal rounded-3xl bg-white p-8 ring-1 ring-slate-200">
+            <div class="grid h-11 w-11 place-items-center rounded-xl bg-navy-100 text-navy-800">
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 6.5C10 4.5 6.5 4 3 5v14c3.5-1 7-.5 9 1.5 2-2 5.5-2.5 9-1.5V5c-3.5-1-7-.5-9 1.5zM12 6.5V20"/></svg>
+            </div>
+            <h3 class="mt-5 font-display text-lg font-bold text-navy-950">Lo que aprendí</h3>
+            <p class="mt-3 text-sm leading-relaxed">Que la precisión técnica no basta para que una herramienta sea buena. Un modelo puede ser exacto en promedio e injusto con quienes más lo necesitan. La ética no frena la innovación: la hace confiable.</p>
+          </article>
+          <article class="reveal rounded-3xl bg-white p-8 ring-1 ring-slate-200">
+            <div class="grid h-11 w-11 place-items-center rounded-xl bg-navy-100 text-navy-800">
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3M18 3v4h-4M6 21v-4h4"/></svg>
+            </div>
+            <h3 class="mt-5 font-display text-lg font-bold text-navy-950">Cómo cambió mi comprensión</h3>
+            <p class="mt-3 text-sm leading-relaxed">Al inicio veía el dilema como “humano contra máquina”. Ahora lo entiendo como un problema de diseño institucional: quién valida, quién supervisa, quién informa y quién responde. El médico no compite con la IA; la gobierna.</p>
+          </article>
+          <article class="reveal rounded-3xl bg-white p-8 ring-1 ring-slate-200">
+            <div class="grid h-11 w-11 place-items-center rounded-xl bg-navy-100 text-navy-800">
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20a6 6 0 0 1 12 0M14 20a4.5 4.5 0 0 1 7 0"/></svg>
+            </div>
+            <h3 class="mt-5 font-display text-lg font-bold text-navy-950">Importancia de deliberar</h3>
+            <p class="mt-3 text-sm leading-relaxed">En la profesión, la deliberación bioética protege al paciente y al médico. Como ciudadanos, nos permite exigir que las tecnologías que deciden sobre nuestra salud sean transparentes, equitativas y sujetas a control democrático.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 6. REFERENCIAS ===================== -->
+    <section id="referencias" class="py-20 md:py-28">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <header class="reveal">
+          <p class="font-display text-sm font-bold uppercase tracking-widest text-navy-600">Sección 06</p>
+          <h2 class="mt-3 font-display text-3xl font-extrabold tracking-tight text-navy-950 sm:text-4xl">Referencias</h2>
+          <p class="mt-3 text-sm text-slate-500">Formato APA, 7.ª edición. Haz clic en cualquier cita del texto para llegar a su referencia.</p>
+        </header>
+
+        <ol class="mt-10 space-y-3 text-sm leading-relaxed">
+          <li id="ref-adamson2018" class="ref-item apa rounded-xl border border-transparent p-3 pl-11 transition">Adamson, A. S., &amp; Smith, A. (2018). Machine learning and health care disparities in dermatology. <em>JAMA Dermatology, 154</em>(11), 1247–1248. https://doi.org/10.1001/jamadermatol.2018.2348</li>
+          <li id="ref-ayers2023" class="ref-item apa rounded-xl border border-transparent p-3 pl-11 transition">Ayers, J. W., Poliak, A., Dredze, M., Leas, E. C., Zhu, Z., Kelley, J. B., Faix, D. J., Goodman, A. M., Longhurst, C. A., Hogarth, M., &amp; Smith, D. M. (2023). Comparing physician and artificial intelligence chatbot responses to patient questions posted to a public social media forum. <em>JAMA Internal Medicine, 183</em>(6), 589–596. https://doi.org/10.1001/jamainternmed.2023.1838</li>
+          <li id="ref-beauchamp2019" class="ref-item apa rounded-xl border border-transparent p-3 pl-11 transition">Beauchamp, T. L., &amp; Childress, J. F. (2019). <em>Principles of biomedical ethics</em> (8.ª ed.). Oxford University Press.</li>
+          <li id="ref-char2018" class="ref-item apa rounded-xl border border-transparent p-3 pl-11 transition">Char, D. S., Shah, N. H., &amp; Magnus, D. (2018). Implementing machine learning in health care — Addressing ethical challenges. <em>The New England Journal of Medicine, 378</em>(11), 981–983. https://doi.org/10.1056/NEJMp1714229</li>
+          <li id="ref-ley23" class="ref-item apa rounded-xl border border-transparent p-3 pl-11 transition">Congreso de Colombia. (1981, 18 de febrero). <em>Ley 23 de 1981: Por la cual se dictan normas en materia de ética médica</em>.</li>
+          <li id="ref-ley1581" class="ref-item apa rounded-xl border border-transparent p-3 pl-11 transition">Congreso de Colombia. (2012, 17 de octubre). <em>Ley Estatutaria 1581 de 2012: Por la cual se dictan disposiciones generales para la protección de datos personales</em>.</li>
+          <li id="ref-conpes3975" class="ref-item apa rounded-xl border border-transparent p-3 pl-11 transition">Consejo Nacional de Política Económica y Social. (2019). <em>Documento CONPES 3975: Política nacional para la transformación digital e inteligencia artificial</em>. Departamento Nacional de Planeación.</li>
+          <li id="ref-esteva2017" class="ref-item apa rounded-xl border border-transparent p-3 pl-11 transition">Esteva, A., Kuprel, B., Novoa, R. A., Ko, J., Swetter, S. M., Blau, H. M., &amp; Thrun, S. (2017). Dermatologist-level classification of skin cancer with deep neural networks. <em>Nature, 542</em>(7639), 115–118. https://doi.org/10.1038/nature21056</li>
+          <li id="ref-floridi2018" class="ref-item apa rounded-xl border border-transparent p-3 pl-11 transition">Floridi, L., Cowls, J., Beltrametti, M., Chatila, R., Chazerand, P., Dignum, V., Luetge, C., Madelin, R., Pagallo, U., Rossi, F., Schafer, B., Valcke, P., &amp; Vayena, E. (2018). AI4People—An ethical framework for a good AI society: Opportunities, risks, principles, and recommendations. <em>Minds and Machines, 28</em>(4), 689–707. https://doi.org/10.1007/s11023-018-9482-5</li>
+          <li id="ref-gawande2018" class="ref-item apa rounded-xl border border-transparent p-3 pl-11 transition">Gawande, A. (2018, 12 de noviembre). Why doctors hate their computers. <em>The New Yorker</em>. https://www.newyorker.com/magazine/2018/11/12/why-doctors-hate-their-computers</li>
+          <li id="ref-goddard2012" class="ref-item apa rounded-xl border border-transparent p-3 pl-11 transition">Goddard, K., Roudsari, A., &amp; Wyatt, J. C. (2012). Automation bias: A systematic review of frequency, effect mediators, and mitigators. <em>Journal of the American Medical Informatics Association, 19</em>(1), 121–127. https://doi.org/10.1136/amiajnl-2011-000089</li>
+          <li id="ref-grote2020" class="ref-item apa rounded-xl border border-transparent p-3 pl-11 transition">Grote, T., &amp; Berens, P. (2020). On the ethics of algorithmic decision-making in healthcare. <em>Journal of Medical Ethics, 46</em>(3), 205–211. https://doi.org/10.1136/medethics-2019-105586</li>
+          <li id="ref-jonas1995" class="ref-item apa rounded-xl border border-transparent p-3 pl-11 transition">Jonas, H. (1995). <em>El principio de responsabilidad: Ensayo de una ética para la civilización tecnológica</em> (J. M. Fernández Retenaga, Trad.). Herder. (Obra original publicada en 1979)</li>
+          <li id="ref-lee2023" class="ref-item apa rounded-xl border border-transparent p-3 pl-11 transition">Lee, P., Goldberg, C., &amp; Kohane, I. (2023). <em>The AI revolution in medicine: GPT-4 and beyond</em>. Pearson.</li>
+          <li id="ref-london2019" class="ref-item apa rounded-xl border border-transparent p-3 pl-11 transition">London, A. J. (2019). Artificial intelligence and black-box medical decisions: Accuracy versus explainability. <em>Hastings Center Report, 49</em>(1), 15–21. https://doi.org/10.1002/hast.973</li>
+          <li id="ref-obermeyer2019" class="ref-item apa rounded-xl border border-transparent p-3 pl-11 transition">Obermeyer, Z., Powers, B., Vogeli, C., &amp; Mullainathan, S. (2019). Dissecting racial bias in an algorithm used to manage the health of populations. <em>Science, 366</em>(6464), 447–453. https://doi.org/10.1126/science.aax2342</li>
+          <li id="ref-oms2021" class="ref-item apa rounded-xl border border-transparent p-3 pl-11 transition">Organización Mundial de la Salud. (2021). <em>Ethics and governance of artificial intelligence for health: WHO guidance</em>. https://www.who.int/publications/i/item/9789240029200</li>
+          <li id="ref-ue2024" class="ref-item apa rounded-xl border border-transparent p-3 pl-11 transition">Parlamento Europeo y Consejo de la Unión Europea. (2024). <em>Reglamento (UE) 2024/1689 por el que se establecen normas armonizadas en materia de inteligencia artificial (Reglamento de Inteligencia Artificial)</em>. Diario Oficial de la Unión Europea. https://eur-lex.europa.eu/eli/reg/2024/1689/oj</li>
+          <li id="ref-pellegrino1993" class="ref-item apa rounded-xl border border-transparent p-3 pl-11 transition">Pellegrino, E. D., &amp; Thomasma, D. C. (1993). <em>The virtues in medical practice</em>. Oxford University Press.</li>
+          <li id="ref-price2019" class="ref-item apa rounded-xl border border-transparent p-3 pl-11 transition">Price, W. N., II, Gerke, S., &amp; Cohen, I. G. (2019). Potential liability for physicians using artificial intelligence. <em>JAMA, 322</em>(18), 1765–1766. https://doi.org/10.1001/jama.2019.15064</li>
+          <li id="ref-rajkomar2018" class="ref-item apa rounded-xl border border-transparent p-3 pl-11 transition">Rajkomar, A., Hardt, M., Howell, M. D., Corrado, G., &amp; Chin, M. H. (2018). Ensuring fairness in machine learning to advance health equity. <em>Annals of Internal Medicine, 169</em>(12), 866–872. https://doi.org/10.7326/M18-1990</li>
+          <li id="ref-rudin2019" class="ref-item apa rounded-xl border border-transparent p-3 pl-11 transition">Rudin, C. (2019). Stop explaining black box machine learning models for high stakes decisions and use interpretable models instead. <em>Nature Machine Intelligence, 1</em>(5), 206–215. https://doi.org/10.1038/s42256-019-0048-x</li>
+          <li id="ref-topol2019a" class="ref-item apa rounded-xl border border-transparent p-3 pl-11 transition">Topol, E. J. (2019a). High-performance medicine: The convergence of human and artificial intelligence. <em>Nature Medicine, 25</em>(1), 44–56. https://doi.org/10.1038/s41591-018-0300-7</li>
+          <li id="ref-topol2019b" class="ref-item apa rounded-xl border border-transparent p-3 pl-11 transition">Topol, E. (2019b). <em>Deep medicine: How artificial intelligence can make healthcare human again</em>. Basic Books.</li>
+          <li id="ref-unesco2021" class="ref-item apa rounded-xl border border-transparent p-3 pl-11 transition">UNESCO. (2021). <em>Recomendación sobre la ética de la inteligencia artificial</em>. https://unesdoc.unesco.org/ark:/48223/pf0000380455_spa</li>
+          <li id="ref-verghese2018" class="ref-item apa rounded-xl border border-transparent p-3 pl-11 transition">Verghese, A. (2018, 16 de mayo). How tech can turn doctors into clerical workers. <em>The New York Times Magazine</em>. https://www.nytimes.com/interactive/2018/05/16/magazine/health-issue-what-we-lose-with-data-driven-medicine.html</li>
+          <li id="ref-wong2021" class="ref-item apa rounded-xl border border-transparent p-3 pl-11 transition">Wong, A., Otles, E., Donnelly, J. P., Krumm, A., McCullough, J., DeTroyer-Cooley, O., Pestrue, J., Phillips, M., Konye, J., Penoza, C., Ghous, M., &amp; Singh, K. (2021). External validation of a widely implemented proprietary sepsis prediction model in hospitalized patients. <em>JAMA Internal Medicine, 181</em>(8), 1065–1070. https://doi.org/10.1001/jamainternmed.2021.2626</li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== PIE DE PÁGINA ===================== -->
+  <footer class="bg-black py-12 text-sm text-slate-400">
+    <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-4 sm:px-6 md:flex-row lg:px-8">
+      <div class="text-center md:text-left">
+        <p class="font-display text-base font-bold text-white">EL meédico contra el algoritmo</p>
+        <p class="mt-1">Juan Pablo Cortes · Ética y Axiología · <span id="year"></span></p>
+      </div>
+      <a href="#inicio" class="rounded-full border border-white/15 px-5 py-2 text-white transition hover:bg-white/10">Volver al inicio</a>
+    </div>
+  </footer>
+
+  <!-- Botón volver arriba -->
+  <button id="back-to-top" class="pointer-events-none fixed bottom-6 right-6 z-40 grid h-12 w-12 place-items-center rounded-full bg-navy-900 text-white opacity-0 shadow-xl transition hover:bg-navy-700" aria-label="Volver arriba">
+    <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m6 15 6-6 6 6"/></svg>
+  </button>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
